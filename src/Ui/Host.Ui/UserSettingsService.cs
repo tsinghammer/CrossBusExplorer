@@ -1,5 +1,4 @@
 using System.Text.Json;
-using CrossBusExplorer.Website;
 using CrossBusExplorer.Website.Models;
 namespace CrossBusExplorer.Host.Ui;
 
@@ -24,11 +23,15 @@ public class UserSettingsService : IUserSettingsService
         return Task.FromResult(JsonSerializer.Deserialize<UserSettings>(json)
                                ?? new UserSettings());
     }
-    
+
     public Task SaveAsync(UserSettings userSettings, CancellationToken cancellationToken)
     {
         Preferences.Set(key, JsonSerializer.Serialize(userSettings));
 
         return Task.CompletedTask;
     }
+}
+
+public interface IUserSettingsService
+{
 }
