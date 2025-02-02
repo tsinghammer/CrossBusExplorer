@@ -11,17 +11,11 @@
   <DialogContent>
     <MudPaper Elevation="3">
       <MudField Variant="Variant.Outlined" Label="File type">
-        <MudRadioGroup @bind-SelectedOption="_uploadFileType"
-                       For="@(() => _uploadFileType)">
-          <MudRadio Dense="true"
-                    Size="Size.Small"
-                    Option="UploadFileType.Body">
+        <MudRadioGroup @bind-Value="_uploadFileType" For="@(() => _uploadFileType)">
+          <MudRadio Dense="true" Size="Size.Small" Value="UploadFileType.Body">
             Body only
           </MudRadio>
-          <MudRadio Dense="true"
-                    Size="Size.Small"
-                    Disabled="true"
-                    Option="UploadFileType.BodyWithApplicationProperties">
+          <MudRadio Dense="true" Size="Size.Small" Disabled="true" Value="UploadFileType.BodyWithApplicationProperties">
             Body with ApplicationProperties (not yet supported)
           </MudRadio>
         </MudRadioGroup>
@@ -31,11 +25,8 @@
       <MudField Variant="Variant.Outlined" Label="Select files">
         <MudFileUpload T="IReadOnlyList<IBrowserFile>" FilesChanged="UploadFilesAsync" MaximumFileCount="200">
           <ButtonTemplate>
-            <MudButton HtmlTag="label"
-                       Variant="Variant.Filled"
-                       Color="Color.Primary"
-                       StartIcon="@Icons.Material.Filled.CloudUpload"
-                       for="@context.Id">
+            <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary"
+              StartIcon="@Icons.Material.Filled.CloudUpload">
               Select multiple files
             </MudButton>
           </ButtonTemplate>
@@ -44,17 +35,11 @@
     </MudPaper>
   </DialogContent>
   <DialogActions>
-    <MudButton ButtonType="ButtonType.Reset"
-               Color="Color.Default"
-               OnClick="@(CloseDialog)"
-               Class="px-10">
+    <MudButton ButtonType="ButtonType.Reset" Color="Color.Default" OnClick="@(CloseDialog)" Class="px-10">
       Close
     </MudButton>
-    <MudButton ButtonType="ButtonType.Button"
-               Color="Color.Success"
-               OnClick="@(Submit)"
-               Disabled="@(!_fileContents.Any())"
-               Class="px-10">
+    <MudButton ButtonType="ButtonType.Button" Color="Color.Success" OnClick="@(Submit)"
+      Disabled="@(!_fileContents.Any())" Class="px-10">
       Upload @_fileContents.Count files
     </MudButton>
   </DialogActions>
@@ -62,7 +47,7 @@
 
 @code {
   [CascadingParameter]
-  MudDialogInstance MudDialog { get; set; }
+  IDialogReference MudDialog { get; set; }
 
   IList<string> _fileContents = new List<string>();
 

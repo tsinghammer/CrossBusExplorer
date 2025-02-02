@@ -5,7 +5,7 @@ namespace CrossBusExplorer.Website.Mappings;
 
 public static class TopicMappings
 {
-        public static TopicFormModel ToFormModel(this TopicDetails details, OperationType operationType)
+    public static TopicFormModel ToFormModel(this TopicDetails details, OperationType operationType)
     {
         return new TopicFormModel(operationType)
         {
@@ -21,7 +21,7 @@ public static class TopicMappings
             RequiresDuplicateDetection = details.Settings.RequiresDuplicateDetection,
             EnablePartitioning = details.Settings.EnablePartitioning,
             SupportOrdering = details.Settings.SupportOrdering,
-            MaxMessageSizeInKilobytes = details.Properties.MaxMessageSizeInKilobytes
+            MaxMessageSizeInKilobytes = details.Properties.MaxMessageSizeInKilobytes ?? 24
         };
     }
 

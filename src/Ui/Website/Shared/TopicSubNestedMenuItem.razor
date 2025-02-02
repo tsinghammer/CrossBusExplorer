@@ -3,7 +3,7 @@
 
 @if (TopicSubscriptionsModel.Topic.IsFolder)
 {
-    <MudNavGroup Icon="@Icons.Filled.FilePresent" ExpandedChanged="OnTopicExpandChange" Expanded="TopicSubscriptionsModel.TopicExpanded" Title=@TopicSubscriptionsModel.Topic.Name>
+    <MudNavGroup Icon="@Icons.Material.Filled.FilePresent" ExpandedChanged="OnTopicExpandChange" Expanded="TopicSubscriptionsModel.TopicExpanded" Title=@TopicSubscriptionsModel.Topic.Name>
         @if (TopicSubscriptionsModel.TopicExpanded)
         {
             @foreach (var model in TopicSubscriptionsModel.ChildrenModels)
@@ -15,13 +15,13 @@
 }
 else
 {
-    <MudNavGroup Icon="@Icons.Filled.FilePresent" Title=@TopicSubscriptionsModel.Topic.Name IconColor="Color.Success">
+    <MudNavGroup Icon="@Icons.Material.Filled.FilePresent" Title=@TopicSubscriptionsModel.Topic.Name IconColor="Color.Success">
         <MudNavLink Match="NavLinkMatch.All"
                     Href=@($"topic/{ConnectionName}/{HttpUtility.UrlEncode(TopicSubscriptionsModel.Topic.FullName)}")
-                    Icon="@Icons.Filled.Topic">
+                    Icon="@Icons.Material.Filled.Topic">
             View topic details
         </MudNavLink>
-        <MudNavGroup Icon="@Icons.Filled.Subscriptions"
+        <MudNavGroup Icon="@Icons.Material.Filled.Subscriptions"
                      Title="Subscriptions"
                      @onclick="@(OnSubscriptionsExpanded)">
 
@@ -33,7 +33,7 @@ else
             {
                 <MudNavLink Match="NavLinkMatch.All"
                             Href=@($"new-subscription/{ConnectionName}/{HttpUtility.UrlEncode(TopicSubscriptionsModel.Topic.FullName)}")
-                            Icon="@Icons.Filled.Add">
+                            Icon="@Icons.Material.Filled.Add">
                     Create new subscription
                 </MudNavLink>
 
@@ -41,7 +41,7 @@ else
                 {
                     <MudNavLink Match="NavLinkMatch.All"
                                 Href=@($"subscription/{ConnectionName}/{HttpUtility.UrlEncode(TopicSubscriptionsModel.Topic.FullName)}/{HttpUtility.UrlEncode(subscription.SubscriptionName)}")
-                                Icon="@Icons.Filled.FormatLineSpacing">
+                                Icon="@Icons.Material.Filled.FormatLineSpacing">
                         <MudTooltip Placement="Placement.Right" Text="@($"{subscription.SubscriptionName} (Active messages: {subscription.ActiveMessagesCount}, " + 
                                             $"Dead letters: {subscription.DeadLetterMessagesCount}, " + 
                                             $"Transfer messages: {subscription.TransferMessagesCount}")">

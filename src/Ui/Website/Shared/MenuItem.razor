@@ -3,7 +3,7 @@
 <MudNavGroup Title=@Value.ConnectionName
              Icon="@Icons.Material.Filled.Link">
 
-    <MudNavGroup Icon="@Icons.Filled.Queue"
+    <MudNavGroup Icon="@Icons.Material.Filled.Queue"
                  Title="Queues"
                  @bind-Expanded=@Value.QueuesExpanded
                  onclick="@(() => OnQueuesExpandChange())">
@@ -15,7 +15,7 @@
         {
             <MudNavLink Match="NavLinkMatch.All"
                         Href=@($"new-queue/{Value.ConnectionName}")
-                        Icon="@Icons.Filled.Add">
+                        Icon="@Icons.Material.Filled.Add">
                 Create new queue
             </MudNavLink>
         }
@@ -24,7 +24,7 @@
         {
             <MudNavLink Match="NavLinkMatch.All"
                         Href=@($"queue/{Value.ConnectionName}/{HttpUtility.UrlEncode(queue.Name)}")
-                        Icon="@Icons.Filled.Queue">
+                        Icon="@Icons.Material.Filled.Queue">
                 <MudTooltip Placement="Placement.Right" Text="@($"{queue.Name} (Active messages: {queue.ActiveMessagesCount}, " + $"Dead letters: {queue.DeadLetterMessagesCount}, " + $"Transfer messages: {queue.InTransferMessagesCount}, " + $"Scheduled messages count: {queue.ScheduledMessagesCount})")">
                     @queue.Name
                     (@queue.ActiveMessagesCount, @queue.DeadLetterMessagesCount, @queue.InTransferMessagesCount,
@@ -35,7 +35,7 @@
         }
     </MudNavGroup>
 
-    <MudNavGroup Icon="@Icons.Filled.Folder"
+    <MudNavGroup Icon="@Icons.Material.Filled.Folder"
                  Title="Topics"
                  @bind-Expanded=@Value.TopicsExpanded
                  @onclick="@(() => OnTopicsExpanded())">
@@ -48,7 +48,7 @@
         {
             <MudNavLink Match="NavLinkMatch.All"
                         Href=@($"new-topic/{Value.ConnectionName}")
-                        Icon="@Icons.Filled.Add">
+                        Icon="@Icons.Material.Filled.Add">
                 Create new topic
             </MudNavLink>
         }

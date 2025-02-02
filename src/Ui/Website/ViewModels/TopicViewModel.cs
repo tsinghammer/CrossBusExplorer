@@ -104,7 +104,7 @@ public class TopicViewModel : ITopicViewModel
         parameters.Add(nameof(CloneDialog.ConnectionName), connectionName);
         parameters.Add(nameof(CloneDialog.SourceDialogName), sourceTopicName);
 
-        var dialog = _dialogService.Show<CloneDialog>(
+        var dialog = await _dialogService.ShowAsync<CloneDialog>(
             $"Clone topic {sourceTopicName}",
             parameters,
             new DialogOptions
@@ -115,7 +115,12 @@ public class TopicViewModel : ITopicViewModel
 
         var dialogResult = await dialog.Result;
 
-        if (!dialogResult.Cancelled && dialogResult.Data is string newTopicName)
+        if (dialogResult is null)
+        {
+            return;
+        }
+
+        if (!dialogResult.Canceled && dialogResult.Data is string newTopicName)
         {
             var result = await _topicService.CloneAsync(
                 connectionName,
@@ -137,15 +142,15 @@ public class TopicViewModel : ITopicViewModel
             "ContentText",
             $"Are you sure you want to delete topic {topicName}?");
 
-        var dialog = _dialogService.Show<ConfirmDialog>("Confirm", parameters);
+        var dialog = await _dialogService.ShowAsync<ConfirmDialog>("Confirm", parameters);
         var dialogResult = await dialog.Result;
 
-        if (dialogResult.Data is true)
+        if (dialogResult?.Data is true)
         {
             var deleteResult =
                 await _topicService.DeleteAsync(connectionName, topicName, cancellationToken);
 
-            if (deleteResult.Success)
+            if (TopicRemoved is not null && deleteResult.Success)
             {
                 _snackbar.Add(
                     $"Topic {topicName} successfully deleted.",

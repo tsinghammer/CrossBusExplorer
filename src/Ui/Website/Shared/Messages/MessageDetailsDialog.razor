@@ -315,7 +315,7 @@ else
             <td>
               <MudIconButton
                 Size="Size.Small"
-                Icon="@Icons.Filled.Remove"
+                Icon="@Icons.Material.Filled.Remove"
                 Title="Remove"
                 OnClick="@(() => RemoveApplicationProperty((userProperty)))">
               </MudIconButton>
@@ -383,7 +383,7 @@ else
           <td></td>
           <td>
             <MudTooltip Text="Add new application property">
-              <MudIconButton Icon="@Icons.Filled.Add"
+              <MudIconButton Icon="@Icons.Material.Filled.Add"
                              OnClick="@(AddNewApplicationProperty)"/>
             </MudTooltip>
 
@@ -418,7 +418,7 @@ else
 
 @code {
   [CascadingParameter]
-  MudDialogInstance MudDialog { get; set; }
+  IDialogReference MudDialog { get; set; }
 
   [Parameter]
   public string QueueOrTopicName { get; set; }
@@ -434,13 +434,13 @@ else
 
   private string? _error = null;
 
-  async Task Requeue()
+  void Requeue()
   {
     var formValid = _form.EditContext.Validate();
 
     if (formValid)
     {
-      MudDialog.Close(new RequeueMessage(QueueOrTopicName, _formModel));
+      MudDialog.Close(DialogResult.Ok(new RequeueMessage(QueueOrTopicName, _formModel)));
     }
   }
 

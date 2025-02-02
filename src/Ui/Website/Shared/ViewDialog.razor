@@ -8,7 +8,7 @@
 </MudDialog>
 @code {
     [CascadingParameter] 
-    MudDialogInstance MudDialog { get; set; }
+    IDialogReference MudDialog { get; set; }
     
     [Parameter]
     public string ContentText { get; set; }

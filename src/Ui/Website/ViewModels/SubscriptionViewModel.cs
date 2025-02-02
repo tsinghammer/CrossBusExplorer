@@ -181,7 +181,7 @@ public class SubscriptionViewModel : ISubscriptionViewModel
 
         var dialogResult = await dialog.Result;
 
-        if (!dialogResult.Cancelled && dialogResult.Data is string newSubscriptionName)
+        if (dialogResult is { Canceled: false, Data: string newSubscriptionName })
         {
             var result = await _subscriptionService.CloneAsync(
                 connectionName,

@@ -36,13 +36,13 @@ public static class ServiceCollectionExtensions
     {
         collection.AddSingleton(new MudTheme()
         {
-            Palette = new Palette
+            PaletteLight = new PaletteLight
             {
                 Secondary = Colors.Blue.Darken2
             },
             PaletteDark = new PaletteDark
             {
-                Secondary = Colors.Grey.Darken4
+                Secondary = Colors.Gray.Darken4
             }
         });
 

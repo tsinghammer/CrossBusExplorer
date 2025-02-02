@@ -1,5 +1,6 @@
 ﻿@page "/"
 @page "/connections"
+@using System.Threading
 @using CrossBusExplorer.Website.Models
 
 <PageTitle>Connections</PageTitle>
@@ -29,7 +30,7 @@
                                         Title="Move up"
                                         Disabled="@(Model.Folders.MinBy(p => p.Index).Index == folder.Index)"
                                         OnClick="@(async () => await OnFolderMoveUpAsync(folder))"
-                                        Icon="@Icons.Filled.ArrowUpward">
+                                        Icon="@Icons.Material.Filled.ArrowUpward">
                                     </MudIconButton>
                                 </MudTooltip>
                                 <MudTooltip Text="Move down">
@@ -37,7 +38,7 @@
                                         Title="Move down"
                                         Disabled="@(Model.Folders.MaxBy(p => p.Index).Index == folder.Index)"
                                         OnClick="@(async () => await OnFolderMoveDownAsync(folder))"
-                                        Icon="@Icons.Filled.ArrowDownward">
+                                        Icon="@Icons.Material.Filled.ArrowDownward">
                                     </MudIconButton>
                                 </MudTooltip>
                             </MudItem>
@@ -185,7 +186,7 @@
     [Inject]
     private IConnectionsViewModel Model { get; set; }
 
-    private Task<IEnumerable<string>> SearchFolder(string? value)
+    private async Task<IEnumerable<string>> SearchFolder(string? value, CancellationToken cancellationToken)
     {
         var folders = Model.Folders
             .Where(p =>
@@ -193,7 +194,7 @@
                 p.Name.StartsWith(value, StringComparison.InvariantCultureIgnoreCase))
             .Select(p => p.Name);
 
-        return Task.FromResult(folders);
+        return await Task.FromResult(folders);
     }
 
     private async Task OnServiceBusConnectionFolderDroppedAsync(

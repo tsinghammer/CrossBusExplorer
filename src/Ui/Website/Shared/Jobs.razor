@@ -14,7 +14,7 @@
             <div class="d-flex">
                 <MudText>@($"{job.Name} {job.Progress}%")</MudText>
                 <MudTooltip Text="Cancel">
-                    <MudIconButton Icon="@Icons.Filled.Cancel"
+                    <MudIconButton Icon="@Icons.Material.Filled.Cancel"
                                    Color="Color.Primary"
                                    Size="Size.Small"
                                    OnClick="@(() => Model.CancelJob(job))">

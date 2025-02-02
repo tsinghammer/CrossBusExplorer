@@ -166,7 +166,7 @@ public class QueueViewModel : IQueueViewModel
 
         var dialogResult = await dialog.Result;
 
-        if (!dialogResult.Cancelled && dialogResult.Data is string newQueueName)
+        if (dialogResult is { Canceled: false, Data: string newQueueName })
         {
             var result = await _queueService.CloneAsync(
                 connectionName,

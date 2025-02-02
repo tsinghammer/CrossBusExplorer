@@ -10,18 +10,19 @@
 
   <div class="d-flex gap-2">
     <MudTooltip Text="Receive messages">
-      <MudIconButton Icon="@Icons.Filled.Download" OnClick="@(() => { Model.DialogVisible = true; })"
+      <MudIconButton Icon="@Icons.Material.Filled.Download" OnClick="@(() => { Model.DialogVisible = true; })"
         ButtonType="ButtonType.Button">Receive messages</MudIconButton>
     </MudTooltip>
 
     <MudTooltip Text="Send message">
-      <MudIconButton Icon="@Icons.Filled.Send" OnClick="@(() => Model.ViewMessageDetails(null, true))"
+      <MudIconButton Icon="@Icons.Material.Filled.Send" OnClick="@(() => Model.ViewMessageDetails(null, true))"
         ButtonType="ButtonType.Button">Send message</MudIconButton>
     </MudTooltip>
 
     <MudTooltip Text="Import messages from file">
-      <MudIconButton Icon="@Icons.Filled.FileUpload" OnClick="@(() => Model.ImportMessagesFromFileAsync(default))"
-        ButtonType="ButtonType.Button">Import messages from file</MudIconButton>
+      <MudIconButton Icon="@Icons.Material.Filled.FileUpload"
+        OnClick="@(() => Model.ImportMessagesFromFileAsync(default))" ButtonType="ButtonType.Button">Import messages
+        from file</MudIconButton>
     </MudTooltip>
   </div>
 
@@ -106,25 +107,25 @@
     <MudPaper Elevation="3">
       <MudForm @ref="@form" Model="@_formModel" Validation="@(_validator.ValidateValue)" ValidationDelay="0">
         <MudField Variant="Variant.Outlined" Label="Queue type">
-          <MudRadioGroup @bind-SelectedOption="_formModel.SubQueue" For="@(() => _formModel.SubQueue)">
-            <MudRadio Dense="true" Size="Size.Small" Option="SubQueue.None">
+          <MudRadioGroup @bind-Value="_formModel.SubQueue" For="@(() => _formModel.SubQueue)">
+            <MudRadio Dense="true" Size="Size.Small" Value="SubQueue.None">
               Active messages
             </MudRadio>
-            <MudRadio Dense="true" Size="Size.Small" Option="SubQueue.DeadLetter">
+            <MudRadio Dense="true" Size="Size.Small" Value="SubQueue.DeadLetter">
               Dead letter
             </MudRadio>
-            <MudRadio Dense="true" Size="Size.Small" Option="SubQueue.TransferDeadLetter">
+            <MudRadio Dense="true" Size="Size.Small" Value="SubQueue.TransferDeadLetter">
               Transfer dead letter
             </MudRadio>
           </MudRadioGroup>
         </MudField>
 
         <MudField Variant="Variant.Outlined" Label="Receive mode">
-          <MudRadioGroup @bind-SelectedOption="_formModel.Mode" For="@(() => _formModel.Mode)">
-            <MudRadio Dense="true" Size="Size.Small" Option="ReceiveMode.ReceiveAndDelete">
+          <MudRadioGroup @bind-Value="_formModel.Mode" For="@(() => _formModel.Mode)">
+            <MudRadio Dense="true" Size="Size.Small" Value="ReceiveMode.ReceiveAndDelete">
               Receive and delete
             </MudRadio>
-            <MudRadio Dense="true" Size="Size.Small" Option="ReceiveMode.PeekLock">
+            <MudRadio Dense="true" Size="Size.Small" Value="ReceiveMode.PeekLock">
               Peek lock
             </MudRadio>
           </MudRadioGroup>
@@ -139,7 +140,7 @@
             @*           Option="ReceiveType.All"> *@
             @*     @ReceiveType.All *@
             @* </MudRadio> *@
-            <MudRadio Dense="true" Size="Size.Small" Option="ReceiveType.ByCount">
+            <MudRadio Dense="true" Size="Size.Small" Value="ReceiveType.ByCount">
               @ReceiveType.ByCount
             </MudRadio>
           </MudRadioGroup>

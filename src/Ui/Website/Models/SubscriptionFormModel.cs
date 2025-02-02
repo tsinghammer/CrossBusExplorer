@@ -6,19 +6,19 @@ using CrossBusExplorer.Website.Pages;
 using MudBlazor;
 namespace CrossBusExplorer.Website.Models;
 
-public class SubscriptionFormModel: INotifyPropertyChanged
+public class SubscriptionFormModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
-    
+
     public SubscriptionFormModel(OperationType operationType)
     {
         OperationType = operationType;
     }
-    
+
     public OperationType OperationType { get; }
 
     private string? _topicName;
-    
+
     [Label("Topic name")]
     [Required(ErrorMessage = "Topic name is required")]
     public string? TopicName
@@ -30,9 +30,9 @@ public class SubscriptionFormModel: INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private string? _subscriptionName;
-    
+
     [Label("Name")]
     [Required(ErrorMessage = "Name is required")]
     public string? SubscriptionName
@@ -46,7 +46,7 @@ public class SubscriptionFormModel: INotifyPropertyChanged
     }
 
     private string? _userMetadata;
-    
+
     [Label("User metadata")]
     public string? UserMetadata
     {
@@ -59,7 +59,7 @@ public class SubscriptionFormModel: INotifyPropertyChanged
     }
 
     private TimeSpan? _autoDeleteOnIdle;
-    
+
     [Label("Auto delete queue on idle")]
     [Required(ErrorMessage = "Field is required. Format: DDDD.HH:MM:SS.")]
     public TimeSpan? AutoDeleteOnIdle
@@ -71,9 +71,9 @@ public class SubscriptionFormModel: INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private TimeSpan? _defaultMessageTimeToLive;
-    
+
     [Label("Default message time to live")]
     [Required(ErrorMessage = "Field is required. Format: DDDD.HH:MM:SS.")]
     public TimeSpan? DefaultMessageTimeToLive
@@ -85,9 +85,9 @@ public class SubscriptionFormModel: INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private bool? _supportOrdering;
-    
+
     [Label("Support ordering")]
     public bool? SupportOrdering
     {
@@ -98,9 +98,9 @@ public class SubscriptionFormModel: INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private bool? _enableBatchedOperations;
-    
+
     [Label("Enable batch operations")]
     public bool? EnableBatchedOperations
     {
@@ -112,11 +112,11 @@ public class SubscriptionFormModel: INotifyPropertyChanged
         }
     }
 
-    private int? _maxDeliveryCount;
-    
+    private int _maxDeliveryCount;
+
     [Label("Max delivery count")]
     [Required]
-    public int? MaxDeliveryCount
+    public int MaxDeliveryCount
     {
         get => _maxDeliveryCount;
         set
@@ -125,10 +125,10 @@ public class SubscriptionFormModel: INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
-    
+
+
     private string? _forwardTo;
-    
+
     [Label("Forward to (queue or topic)")]
     public string? ForwardTo
     {
@@ -139,9 +139,9 @@ public class SubscriptionFormModel: INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private string? _forwardDeadLetteredMessagesTo;
-    
+
     [Label("Forward deadletter messages to")]
     public string? ForwardDeadLetteredMessagesTo
     {
@@ -152,9 +152,9 @@ public class SubscriptionFormModel: INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private TimeSpan? _lockDuration;
-    
+
     [Label("Lock duration")]
     [Required(ErrorMessage = "Field is required. Format: DDDD.HH:MM:SS.")]
     public TimeSpan? LockDuration
@@ -166,9 +166,9 @@ public class SubscriptionFormModel: INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private bool? _requiresSession;
-    
+
     [Label("Require session")]
     public bool? RequiresSession
     {
@@ -179,9 +179,9 @@ public class SubscriptionFormModel: INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private bool? _deadLetteringOnMessageExpiration;
-    
+
     [Label("Require session")]
     public bool? DeadLetteringOnMessageExpiration
     {
@@ -192,9 +192,9 @@ public class SubscriptionFormModel: INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private bool? _enableDeadLetteringOnFilterEvaluationExceptions;
-    
+
     [Label("Enable partitioning")]
     public bool? EnableDeadLetteringOnFilterEvaluationExceptions
     {

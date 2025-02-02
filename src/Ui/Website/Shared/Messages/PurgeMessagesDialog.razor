@@ -8,21 +8,14 @@
     <DialogContent>
         <MudPaper Elevation="3">
             <MudField Variant="Variant.Outlined" Label="Queue type">
-                <MudRadioGroup @bind-SelectedOption="_subQueue"
-                               For="@(() => _subQueue)">
-                    <MudRadio Dense="true"
-                              Size="Size.Small"
-                              Option="SubQueue.None">
+                <MudRadioGroup @bind-Value="_subQueue" For="@(() => _subQueue)">
+                    <MudRadio Dense="true" Size="Size.Small" Value="SubQueue.None">
                         Active messages
                     </MudRadio>
-                    <MudRadio Dense="true"
-                              Size="Size.Small"
-                              Option="SubQueue.DeadLetter">
+                    <MudRadio Dense="true" Size="Size.Small" Value="SubQueue.DeadLetter">
                         Dead letter
                     </MudRadio>
-                    <MudRadio Dense="true"
-                              Size="Size.Small"
-                              Option="SubQueue.TransferDeadLetter">
+                    <MudRadio Dense="true" Size="Size.Small" Value="SubQueue.TransferDeadLetter">
                         Transfer dead letter
                     </MudRadio>
                 </MudRadioGroup>
@@ -30,16 +23,10 @@
         </MudPaper>
     </DialogContent>
     <DialogActions>
-        <MudButton ButtonType="ButtonType.Reset"
-                   Color="Color.Default"
-                   OnClick="@(CloseDialog)"
-                   Class="px-10">
+        <MudButton ButtonType="ButtonType.Reset" Color="Color.Default" OnClick="@(CloseDialog)" Class="px-10">
             Close
         </MudButton>
-        <MudButton ButtonType="ButtonType.Button"
-                   Color="Color.Success"
-                   OnClick="@(Submit)"
-                   Class="px-10">
+        <MudButton ButtonType="ButtonType.Button" Color="Color.Success" OnClick="@(Submit)" Class="px-10">
             Purge
         </MudButton>
     </DialogActions>
@@ -47,7 +34,7 @@
 
 @code {
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; }
+    IDialogReference MudDialog { get; set; }
 
     private SubQueue _subQueue;
 

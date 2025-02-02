@@ -436,7 +436,7 @@ public class ConnectionsViewModel : IConnectionsViewModel
 
         var dialogResult = await dialog.Result;
 
-        if (!dialogResult.Cancelled && dialogResult.Data is string folderName)
+        if (dialogResult is { Canceled: false, Data: string folderName })
         {
             if (Folders.Any(p => p.Name.EqualsInvariantIgnoreCase(folderName)))
             {
@@ -476,7 +476,7 @@ public class ConnectionsViewModel : IConnectionsViewModel
 
         var dialogResult = await dialog.Result;
 
-        if (!dialogResult.Cancelled && dialogResult.Data is string newFolderName)
+        if (dialogResult is { Canceled: false, Data: string newFolderName })
         {
             if (Folders.Any(p => p.Name.EqualsInvariantIgnoreCase(newFolderName) &&
                                  !newFolderName.EqualsInvariantIgnoreCase(folderSettings.Name)))

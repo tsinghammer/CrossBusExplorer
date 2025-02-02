@@ -65,13 +65,13 @@
                                              Dense="true"
                                              Margin="@Margin.Dense">
                                 </MudCheckBox>
-                                <MudCheckBox @bind-Checked="@Model.Form.SupportOrdering"
+                                <MudCheckBox @bind-Value="@Model.Form.SupportOrdering"
                                              Label="Support ordering"
                                              Size="Size.Small"
                                              Margin="@Margin.Dense"
                                              Dense="true">
                                 </MudCheckBox>
-                                <MudCheckBox @bind-Checked="@Model.Form.RequiresDuplicateDetection"
+                                <MudCheckBox @bind-Value="@Model.Form.RequiresDuplicateDetection"
                                              Label="Requires duplicate detection"
                                              Size="Size.Small"
                                              Margin="@Margin.Dense"
@@ -114,7 +114,7 @@
                     </MudCardContent>
                     <MudCardActions>
                         <MudTooltip Text="Save">
-                            <MudIconButton Icon=@Icons.Filled.Save
+                            <MudIconButton Icon=@Icons.Material.Filled.Save
                                            ButtonType="ButtonType.Submit"
                                            Color="Color.Success"
                                            Class="px-10">
@@ -125,7 +125,7 @@
                             if (Model.TopicDetails.Info.Status == ServiceBusEntityStatus.Active)
                             {
                                 <MudTooltip Text="Disable">
-                                    <MudIconButton Icon=@Icons.Filled.Lock
+                                    <MudIconButton Icon=@Icons.Material.Filled.Lock
                                                    ButtonType="ButtonType.Button"
                                                    OnClick="@(() => Model.UpdateTopicStatus(ConnectionName, TopicName, ServiceBusEntityStatus.Disabled, default))" Color="Color.Default" Class="px-10">
                                     </MudIconButton>
@@ -134,14 +134,14 @@
                             else
                             {
                                 <MudTooltip Text="Activate">
-                                    <MudIconButton Icon=@Icons.Filled.LockOpen
+                                    <MudIconButton Icon=@Icons.Material.Filled.LockOpen
                                                    ButtonType="ButtonType.Button"
                                                    OnClick="@(() => Model.UpdateTopicStatus(ConnectionName, TopicName, ServiceBusEntityStatus.Active, default))" Color="Color.Default" Class="px-10">
                                     </MudIconButton>
                                 </MudTooltip>
                             }
                             <MudTooltip Text="Delete">
-                                <MudIconButton Icon=@Icons.Filled.Delete
+                                <MudIconButton Icon=@Icons.Material.Filled.Delete
                                                ButtonType="ButtonType.Button"
                                                OnClick="@(() => Model.DeleteTopic(ConnectionName, TopicName, default))"
                                                Color="Color.Error" Class="px-10">

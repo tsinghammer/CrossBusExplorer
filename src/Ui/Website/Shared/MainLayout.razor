@@ -3,32 +3,33 @@
 @inject IConnectionsViewModel _connectionsViewModel
 @inject ISettingsService SettingsService
 
-<MudThemeProvider Theme="_customTheme" @bind-IsDarkMode="@_userSettings.IsDarkMode"/>
-<MudDialogProvider/>
-<MudSnackbarProvider/>
+<MudThemeProvider Theme="_customTheme" @bind-IsDarkMode="@_userSettings.IsDarkMode" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<MudPopoverProvider />
 
 <ErrorBoundary @ref="@_errorBoundary">
   <ChildContent>
 
     <MudLayout>
-      <MudMainContent Style="padding-top: 0; position: fixed; height: 100%; width: 100%; z-index: 0" Class="d-flex flex-grow-1">
+      <MudMainContent Style="padding-top: 0; position: fixed; height: 100%; width: 100%; z-index: 0"
+        Class="d-flex flex-grow-1">
         <MudDrawerContainer>
           <MudDrawer Fixed="true" Elevation="1" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true">
             <MudNavMenu>
               <MudTooltip Placement="Placement.Right" Text="Connections">
-                <MudIconButton Href="connections" Icon="@Icons.Material.Outlined.EditNote"/>
+                <MudIconButton Href="connections" Icon="@Icons.Material.Outlined.EditNote" />
               </MudTooltip>
               <MudTooltip Placement="Placement.Right" Text="Toggle side menu">
-                <MudIconButton Icon="@Icons.Material.Outlined.AccountTree" Color="Color.Inherit" OnClick="@((_) => DrawerToggle())"/>
+                <MudIconButton Icon="@Icons.Material.Outlined.AccountTree" Color="Color.Inherit"
+                  OnClick="@((_) => DrawerToggle())" />
               </MudTooltip>
               <MudTooltip Placement="Placement.Right" Text="Reload menu">
-                <MudIconButton Icon="@Icons.Material.Outlined.Cached"
-                               Color="Color.Inherit"
-                               Disabled="@_navigationViewModel.IsLoading"
-                               OnClick="@((_) => _navigationViewModel.ReloadMenu())"/>
+                <MudIconButton Icon="@Icons.Material.Outlined.Cached" Color="Color.Inherit"
+                  Disabled="@_navigationViewModel.IsLoading" OnClick="@((_) => _navigationViewModel.ReloadMenu())" />
               </MudTooltip>
               <MudTooltip Placement="Placement.Right" Text="Change theme">
-                <MudMenu Icon="@Icons.Filled.MoreVert" Color="Color.Inherit">
+                <MudMenu Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit">
                   <MudMenuItem OnClick="@(() => ChangeDarkModeInternal(false))">Normal</MudMenuItem>
                   <MudMenuItem OnClick="@(() => ChangeDarkModeInternal(true))">Dark</MudMenuItem>
                 </MudMenu>
@@ -39,7 +40,7 @@
           @if (_drawerOpen)
           {
             <MudContainer MaxWidth="MaxWidth.ExtraSmall" Class="mud-height-full overflow-auto">
-              <ServiceBusNavMenu/>
+              <ServiceBusNavMenu />
             </MudContainer>
           }
         </MudDrawerContainer>
@@ -54,7 +55,8 @@
   <ErrorContent>
     <MudLayout>
       <MudAlert Severity="Severity.Error" Variant="Variant.Outlined">@context</MudAlert>
-      <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => { _errorBoundary?.Recover(); }">Recover</MudButton>
+      <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => { _errorBoundary?.Recover(); }">Recover
+      </MudButton>
     </MudLayout>
   </ErrorContent>
 </ErrorBoundary>

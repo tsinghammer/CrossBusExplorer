@@ -9,16 +9,16 @@ namespace CrossBusExplorer.Website.Models;
 public class QueueFormModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
-    
+
     public QueueFormModel(OperationType operationType)
     {
         OperationType = operationType;
     }
-    
+
     public OperationType OperationType { get; }
 
     private string? _name;
-    
+
     [Label("Name")]
     [Required(ErrorMessage = "Name is required")]
     public string? Name
@@ -27,15 +27,18 @@ public class QueueFormModel : INotifyPropertyChanged
         set
         {
             _name = value;
-            this.Notify(PropertyChanged);
+            if (PropertyChanged is not null)
+            {
+                this.Notify(PropertyChanged);
+            }
         }
     }
 
-    private long? _maxSizeInMegabytes;
-    
+    private long _maxSizeInMegabytes;
+
     [Label("Max size in MB")]
     [Required(ErrorMessage = "Field is required")]
-    public long? MaxSizeInMegabytes
+    public long MaxSizeInMegabytes
     {
         get => _maxSizeInMegabytes;
         set
@@ -45,11 +48,11 @@ public class QueueFormModel : INotifyPropertyChanged
         }
     }
 
-    private int? _maxDeliveryCount;
-    
+    private int _maxDeliveryCount;
+
     [Label("Max delivery count")]
     [Required]
-    public int? MaxDeliveryCount
+    public int MaxDeliveryCount
     {
         get => _maxDeliveryCount;
         set
@@ -60,7 +63,7 @@ public class QueueFormModel : INotifyPropertyChanged
     }
 
     private string? _userMetadata;
-    
+
     [Label("User metadata")]
     public string? UserMetadata
     {
@@ -71,9 +74,9 @@ public class QueueFormModel : INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private string? _forwardTo;
-    
+
     [Label("Forward to (queue or topic)")]
     public string? ForwardTo
     {
@@ -84,11 +87,11 @@ public class QueueFormModel : INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
-    private string? _forwardDeadLetteredMessagesTo;
-    
+
+    private string _forwardDeadLetteredMessagesTo;
+
     [Label("Forward deadletter messages to")]
-    public string? ForwardDeadLetteredMessagesTo
+    public string ForwardDeadLetteredMessagesTo
     {
         get => _forwardDeadLetteredMessagesTo;
         set
@@ -97,9 +100,9 @@ public class QueueFormModel : INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private TimeSpan? _duplicateDetectionHistoryTimeWindow;
-    
+
     [Label("Duplicate detection history time window")]
     [Required(ErrorMessage = "Field is required. Format: DDDD.HH:MM:SS.")]
     public TimeSpan? DuplicateDetectionHistoryTimeWindow
@@ -111,9 +114,9 @@ public class QueueFormModel : INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private TimeSpan? _autoDeleteOnIdle;
-    
+
     [Label("Auto delete queue on idle")]
     [Required(ErrorMessage = "Field is required. Format: DDDD.HH:MM:SS.")]
     public TimeSpan? AutoDeleteOnIdle
@@ -125,9 +128,9 @@ public class QueueFormModel : INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private TimeSpan? _defaultMessageTimeToLive;
-    
+
     [Label("Default message time to live")]
     [Required(ErrorMessage = "Field is required. Format: DDDD.HH:MM:SS.")]
     public TimeSpan? DefaultMessageTimeToLive
@@ -141,7 +144,7 @@ public class QueueFormModel : INotifyPropertyChanged
     }
 
     private TimeSpan? _lockDuration;
-    
+
     [Label("Lock duration")]
     [Required(ErrorMessage = "Field is required. Format: DDDD.HH:MM:SS.")]
     public TimeSpan? LockDuration
@@ -153,9 +156,9 @@ public class QueueFormModel : INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private bool? _deadLetteringOnMessageExpiration;
-    
+
     [Label("Dead lettering on message expiration")]
     public bool? DeadLetteringOnMessageExpiration
     {
@@ -167,7 +170,7 @@ public class QueueFormModel : INotifyPropertyChanged
         }
     }
     private bool? _requiresSession;
-    
+
     [Label("Require session")]
     public bool? RequiresSession
     {
@@ -178,9 +181,9 @@ public class QueueFormModel : INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private bool? _enableBatchedOperations;
-    
+
     [Label("Enable batch operations")]
     public bool? EnableBatchedOperations
     {
@@ -191,9 +194,9 @@ public class QueueFormModel : INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private bool? _requiresDuplicateDetection;
-    
+
     [Label("Requires duplicate detection")]
     public bool? RequiresDuplicateDetection
     {
@@ -204,9 +207,9 @@ public class QueueFormModel : INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
+
     private bool? _enablePartitioning;
-    
+
     [Label("Enable partitioning")]
     public bool? EnablePartitioning
     {
@@ -217,11 +220,11 @@ public class QueueFormModel : INotifyPropertyChanged
             this.Notify(PropertyChanged);
         }
     }
-    
-    private long? _maxMessageSizeInKilobytes;
-    
+
+    private long _maxMessageSizeInKilobytes;
+
     [Label("Max message size in KB")]
-    public long? MaxMessageSizeInKilobytes
+    public long MaxMessageSizeInKilobytes
     {
         get => _maxMessageSizeInKilobytes;
         set

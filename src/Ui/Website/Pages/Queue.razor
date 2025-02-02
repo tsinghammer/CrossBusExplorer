@@ -79,14 +79,14 @@
                                              Dense="true"
                                              Margin="@Margin.Dense">
                                 </MudCheckBox>
-                                <MudCheckBox @bind-Checked="@Model.Form.RequiresDuplicateDetection"
+                                <MudCheckBox @bind-Value="@Model.Form.RequiresDuplicateDetection"
                                              Label="Requires duplicate detection"
                                              Size="Size.Small"
                                              Margin="@Margin.Dense"
                                              Dense="true"
                                              Disabled="@(Model.Form?.OperationType == OperationType.Update)">
                                 </MudCheckBox>
-                                <MudCheckBox @bind-Checked="@Model.Form.RequiresSession"
+                                <MudCheckBox @bind-Value="@Model.Form.RequiresSession"
                                              Label="Requires session"
                                              Size="Size.Small"
                                              Margin="@Margin.Dense"
@@ -149,7 +149,7 @@
                     </MudCardContent>
                     <MudCardActions>
                         <MudTooltip Text="Save">
-                            <MudIconButton Icon=@Icons.Filled.Save
+                            <MudIconButton Icon=@Icons.Material.Filled.Save
                                            ButtonType="ButtonType.Submit"
                                            Color="Color.Success"
                                            Class="px-10">
@@ -160,7 +160,7 @@
                             if (Model.QueueDetails.Info.Status == ServiceBusEntityStatus.Active)
                             {
                                 <MudTooltip Text="Disable">
-                                    <MudIconButton Icon=@Icons.Filled.Lock
+                                    <MudIconButton Icon=@Icons.Material.Filled.Lock
                                                    ButtonType="ButtonType.Button"
                                                    OnClick="@(() => Model.UpdateQueueStatus(ConnectionName, QueueName, ServiceBusEntityStatus.Disabled, default))" Color="Color.Default" Class="px-10">
                                     </MudIconButton>
@@ -169,21 +169,21 @@
                             else
                             {
                                 <MudTooltip Text="Activate">
-                                    <MudIconButton Icon=@Icons.Filled.LockOpen
+                                    <MudIconButton Icon=@Icons.Material.Filled.LockOpen
                                                    ButtonType="ButtonType.Button"
                                                    OnClick="@(() => Model.UpdateQueueStatus(ConnectionName, QueueName, ServiceBusEntityStatus.Active, default))" Color="Color.Default" Class="px-10">
                                     </MudIconButton>
                                 </MudTooltip>
                             }
                             <MudTooltip Text="Purge messages">
-                                <MudIconButton Icon=@Icons.Filled.RemoveFromQueue
+                                <MudIconButton Icon=@Icons.Material.Filled.RemoveFromQueue
                                                ButtonType="ButtonType.Button"
                                                OnClick="@(() => Model.PurgeMessages(ConnectionName, QueueName, default))"
                                                Color="Color.Default" Class="px-10">
                                 </MudIconButton>
                             </MudTooltip>
                             <MudTooltip Text="Resend dead letter messages">
-                                <MudIconButton Icon=@Icons.Filled.Refresh
+                                <MudIconButton Icon=@Icons.Material.Filled.Refresh
                                                ButtonType="ButtonType.Button"
                                                Disabled=@(Model.QueueDetails.Info.DeadLetterMessagesCount==0)
                                                OnClick="@(() => Model.ResendDeadLetters(ConnectionName, QueueName, default))"
@@ -191,7 +191,7 @@
                                 </MudIconButton>
                             </MudTooltip>
                             <MudTooltip Text="Delete">
-                                <MudIconButton Icon=@Icons.Filled.Delete
+                                <MudIconButton Icon=@Icons.Material.Filled.Delete
                                                ButtonType="ButtonType.Button"
                                                OnClick="@(() => Model.DeleteQueue(ConnectionName, QueueName, default))"
                                                Color="Color.Error" Class="px-10">

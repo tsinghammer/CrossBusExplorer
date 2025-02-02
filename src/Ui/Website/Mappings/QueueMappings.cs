@@ -15,7 +15,7 @@ public static class QueueMappings
             MaxDeliveryCount = details.Properties.MaxDeliveryCount,
             UserMetadata = details.Properties.UserMetadata,
             ForwardTo = details.Properties.ForwardTo,
-            ForwardDeadLetteredMessagesTo = details.Properties.ForwardDeadLetteredMessagesTo,
+            ForwardDeadLetteredMessagesTo = details.Properties.ForwardDeadLetteredMessagesTo ?? string.Empty,
             DuplicateDetectionHistoryTimeWindow = details.TimeSettings
                 .DuplicateDetectionHistoryTimeWindow,
             AutoDeleteOnIdle = details.TimeSettings.AutoDeleteOnIdle,
@@ -28,7 +28,7 @@ public static class QueueMappings
             EnableBatchedOperations = details.Settings.EnableBatchedOperations,
             RequiresDuplicateDetection = details.Settings.RequiresDuplicateDetection,
             EnablePartitioning = details.Settings.EnablePartitioning,
-            MaxMessageSizeInKilobytes = details.Properties.MaxMessageSizeInKilobytes
+            MaxMessageSizeInKilobytes = details.Properties.MaxMessageSizeInKilobytes ?? 24
         };
     }
 
