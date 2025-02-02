@@ -6,26 +6,32 @@
     </TitleContent>
     <DialogContent>
         <MudForm @ref="form">
-            <MudTextField T="string" @bind-Value="FolderName" @bind-Text="FolderName" MaxLength="260" Label="Name" Required="true" RequiredError="Name is required!"/>
+            <MudTextField T="string" @bind-Value="FolderName" @bind-Text="FolderName" MaxLength="260" Label="Name"
+                Required="true" RequiredError="Name is required!" />
         </MudForm>
     </DialogContent>
     <DialogActions>
-        <MudButton Color="Color.Default" OnClick="@(CloseDialog)">Close</MudButton>
-        <MudButton Color="Color.Success" OnClick="@(Submit)">Save</MudButton>
+        <MudButton Color="Color.Default" OnClick="CloseDialog">Close</MudButton>
+        <MudButton Color="Color.Success" OnClick="Submit">Save</MudButton>
     </DialogActions>
 </MudDialog>
 
 @code {
     [CascadingParameter]
-    IDialogReference MudDialog { get; set; }
+    public required IMudDialogInstance MudDialog { get; set; }
 
     [Parameter]
-    public string FolderDialogName { get; set; }
+    public required string FolderDialogName { get; set; }
 
     [Parameter]
     public string? FolderName { get; set; }
 
-    MudForm form;
+    public required MudForm form;
+
+    protected override void OnInitialized()
+    {
+        Console.WriteLine($"[DEBUG] Dialog instance: {MudDialog}");
+    }
 
     async Task Submit()
     {
@@ -37,8 +43,13 @@
         }
 
     }
-    private void CloseDialog()
+    void CloseDialog()
     {
+        if (MudDialog == null)
+        {
+            Console.WriteLine("[ERROR] MudDialog is NULL");
+            return;
+        }
         MudDialog.Close(DialogResult.Cancel());
     }
 }

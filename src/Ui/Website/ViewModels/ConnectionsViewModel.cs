@@ -48,9 +48,16 @@ public class ConnectionsViewModel : IConnectionsViewModel
             _serviceBusConnections = value;
             _serviceBusConnections.CollectionChanged += (_, _) =>
             {
-                this.Notify(PropertyChanged);
+                if (PropertyChanged is not null)
+                {
+                    this.Notify(PropertyChanged);
+                }
             };
-            this.Notify(PropertyChanged);
+
+            if (PropertyChanged is not null)
+            {
+                this.Notify(PropertyChanged);
+            }
         }
     }
 
@@ -65,9 +72,16 @@ public class ConnectionsViewModel : IConnectionsViewModel
             _folders = value;
             _folders.CollectionChanged += (_, _) =>
             {
-                this.Notify(PropertyChanged);
+                if (PropertyChanged is not null)
+                {
+                    this.Notify(PropertyChanged);
+                }
             };
-            this.Notify(PropertyChanged);
+
+            if (PropertyChanged is not null)
+            {
+                this.Notify(PropertyChanged);
+            }
         }
     }
 
@@ -79,7 +93,10 @@ public class ConnectionsViewModel : IConnectionsViewModel
         set
         {
             _saveDialogVisible = value;
-            this.Notify(PropertyChanged);
+            if (PropertyChanged is not null)
+            {
+                this.Notify(PropertyChanged);
+            }
         }
     }
 
@@ -91,7 +108,10 @@ public class ConnectionsViewModel : IConnectionsViewModel
         set
         {
             _saveConnectionForm = value;
-            this.Notify(PropertyChanged);
+            if (PropertyChanged is not null)
+            {
+                this.Notify(PropertyChanged);
+            }
         }
     }
 
@@ -420,12 +440,13 @@ public class ConnectionsViewModel : IConnectionsViewModel
     }
     public async Task OpenNewFolderDialogAsync(CancellationToken cancellationToken)
     {
-        var parameters = new DialogParameters();
+        var parameters = new DialogParameters
+        {
+            { nameof(FolderDialog.FolderName), null },
+            { nameof(FolderDialog.FolderDialogName), "Add folder" }
+        };
 
-        parameters.Add(nameof(FolderDialog.FolderName), null);
-        parameters.Add(nameof(FolderDialog.FolderDialogName), "Add folder");
-
-        var dialog = _dialogService.Show<FolderDialog>(
+        var dialog = await _dialogService.ShowAsync<FolderDialog>(
             "Add folder",
             parameters,
             new DialogOptions
@@ -460,14 +481,14 @@ public class ConnectionsViewModel : IConnectionsViewModel
     {
         var oldFolderName = folderSettings.Name;
 
-        var parameters = new DialogParameters();
+        DialogParameters parameters = new()
+        {
+            { nameof(FolderDialog.FolderName), folderSettings.Name },
+            { nameof(FolderDialog.FolderDialogName), "Edit folder" }
+        };
 
-        parameters.Add(nameof(FolderDialog.FolderName), folderSettings.Name);
-        parameters.Add(nameof(FolderDialog.FolderDialogName), "Edit folder");
-
-        var dialog = _dialogService.Show<FolderDialog>(
+        var dialog = await _dialogService.ShowAsync<FolderDialog>(
             $"Edit folder {folderSettings.Name}",
-            parameters,
             new DialogOptions
             {
                 FullWidth = true,
